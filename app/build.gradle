@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "demo.test.cz.czdemos"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file(System.getenv("HOME") + "/.ecarx/EcarxDebug.jks")
+            storePassword "EcarxDebug"
+            keyAlias "EcarxDebug"
+            keyPassword "EcarxDebug"
+        }
+        release {
+            storeFile file(System.getenv("ANDROID_KEYSTORE") == null ? "/dev/null" : System.getenv("ANDROID_KEYSTORE"))
+            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("ANDROID_KEY_ALIAS")
+            keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        debug {
+            //debug下不开启混淆
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            shrinkResources true
+            zipAlignEnabled true
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds true
+        abortOnError false
+    }
+}
+
+repositories {
+    flatDir { dirs 'libs' }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.+'
+    implementation 'com.android.support:design:27.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-vector-drawable:27.+'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //添加http库的依赖
+    implementation project(':http_library')
+}

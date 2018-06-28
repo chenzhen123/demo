@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("boolean","Web_Log","fasle")
+            buildConfigField("boolean","Local_Log","false")
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField("boolean","Web_Log","true")
+            buildConfigField("boolean","Local_Log","true")
+            minifyEnabled false
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.+'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    //Retrofit与RxAndroid配置依赖
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //GSON解析
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    //RxJava与RxAndroid的依赖
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.10'
+    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+}

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">http_library</string>
+    <!--异常信息-->
+    <string name="error_message_system">系统异常</string>
+    <string name="error_message_network">连接超时</string>
+    <string name="error_message_conversion">解析错误</string>
+    <string name="error_message_http">请求失败</string>
+    <string name="error_message_unexpected">未知错误</string>
+    <string name="error_message_5000">必要字段缺失</string>
+    <string name="error_message_5001">无查询结果</string>
+    <string name="error_message_5002">系统异常</string>
+    <string name="error_message_5003">依赖系统异常</string>
+    <string name="error_message_5004">密钥不匹配</string>
+
+    <string name="http_library_loading">加载中</string>
+</resources>
