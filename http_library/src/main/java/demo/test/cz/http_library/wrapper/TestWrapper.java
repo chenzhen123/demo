@@ -44,6 +44,7 @@ public class TestWrapper extends BaseWrapper {
         TestDataBody body = new TestDataBody();
         body.setCode(code);
         RequestBody requestBody = RequestBody.create(MediaType.parse(MediaTypes.JSON), new Gson().toJson(body));
-        doTranceOnActivity(httpUtils.create().getSimCardDetail(requestBody), tip, customObserver);
+        //doTranceOnActivity(httpUtils.create().getSimCardDetail(requestBody), tip, customObserver);
+        doTranceOnFragment(httpUtils.create().getSimCardDetail(requestBody), tip, customObserver);
     }
 }

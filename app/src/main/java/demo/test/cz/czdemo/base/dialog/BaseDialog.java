@@ -44,7 +44,7 @@ public abstract class BaseDialog extends DialogFragment implements IBaseDialog {
             }
         }
         view = inflater.inflate(getLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
+        unbinder = ButterKnife.bind(this, view);
         Window window = getDialog().getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;

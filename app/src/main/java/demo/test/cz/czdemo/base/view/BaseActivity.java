@@ -24,6 +24,8 @@ import com.trello.rxlifecycle2.components.RxActivity;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import demo.test.cz.czdemo.base.IBaseView;
 import demo.test.cz.czdemo.basetips.IUiInit;
 import demo.test.cz.czdemo.utils.ToastUtils;
@@ -43,8 +45,8 @@ import demo.test.cz.http_library.utils.LogUtils;
 public abstract class BaseActivity<P> extends RxActivity implements Itip, IUiInit, IBaseView<P> {
     protected final String TAG = getClass().getSimpleName();
     protected Fragment currentFragment;
-    protected View view;
     protected P presenter;
+    Unbinder unbinder;
     private LoadingDialog dialog;
     private DialogTip dialogTip;
     private DialogTip dialogTipDuration;
@@ -56,6 +58,7 @@ public abstract class BaseActivity<P> extends RxActivity implements Itip, IUiIni
             setContentView(getContentViewId());
             //initWindow();
         }
+        unbinder = ButterKnife.bind(this);
         initDate();
         initView();
         initListener();
@@ -165,5 +168,11 @@ public abstract class BaseActivity<P> extends RxActivity implements Itip, IUiIni
     @Override
     public void setPresenter(P presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

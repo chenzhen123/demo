@@ -15,6 +15,8 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.RxFragment;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import demo.test.cz.czdemo.base.IBaseView;
 import demo.test.cz.czdemo.basetips.IUiInit;
 import demo.test.cz.czdemo.utils.ToastUtils;
@@ -31,8 +33,9 @@ import demo.test.cz.http_library.itip.Itip;
  **/
 public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiInit, IBaseView<P> {
     protected View view;
-    private Activity activity;
+    protected Activity activity;
     protected P presenter;
+    Unbinder unbinder;
     private LoadingDialog dialog;
     private DialogTip dialogTip;
     private DialogTip dialogTipDuration;
@@ -59,6 +62,7 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
             }
         }
         view = inflater.inflate(getContentViewId(), container, false);
+        unbinder = ButterKnife.bind(this, view);
         initView();
         initListener();
         return view;
@@ -140,5 +144,11 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
     @Override
     public void setPresenter(P presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
