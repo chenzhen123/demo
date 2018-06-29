@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import demo.test.cz.czdemo.R;
 import demo.test.cz.czdemo.base.MainContract;
-import demo.test.cz.czdemo.base.fragment.BaseFragment;
+import demo.test.cz.czdemo.base.view.BaseFragment;
 
 
 /**

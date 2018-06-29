@@ -1,12 +1,15 @@
-package demo.test.cz.czdemo.base.fragment;
+package demo.test.cz.czdemo.base.view;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.FragmentEvent;
@@ -14,6 +17,9 @@ import com.trello.rxlifecycle2.components.RxFragment;
 
 import demo.test.cz.czdemo.base.IBaseView;
 import demo.test.cz.czdemo.basetips.IUiInit;
+import demo.test.cz.czdemo.utils.ToastUtils;
+import demo.test.cz.czdemo.widget.DialogTip;
+import demo.test.cz.czdemo.widget.LoadingDialog;
 import demo.test.cz.http_library.itip.Itip;
 
 /**
@@ -23,10 +29,13 @@ import demo.test.cz.http_library.itip.Itip;
  * Create: 2018/6/27 15:34
  * E-mail:zhenchen@ecarx.com.cn
  **/
-public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiInit,IBaseView<P> {
+public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiInit, IBaseView<P> {
     protected View view;
     private Activity activity;
     protected P presenter;
+    private LoadingDialog dialog;
+    private DialogTip dialogTip;
+    private DialogTip dialogTipDuration;
 
     @Override
     public void onAttach(Activity activity) {
@@ -49,7 +58,7 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
                 viewGroup.removeView(view);
             }
         }
-        view = inflater.inflate(getContentViewId(), container,false);
+        view = inflater.inflate(getContentViewId(), container, false);
         initView();
         initListener();
         return view;
@@ -58,37 +67,55 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
 
     @Override
     public void showLoding(int id) {
+        if (dialog == null) {
+            dialog = LoadingDialog.newInstance(getResources().getString(id));
 
+        }
+        if (!dialog.getDialog().isShowing()) {
+            dialog.show(getChildFragmentManager(), "loading");
+        }
     }
 
     @Override
     public void hideLoding() {
-
+        if (dialog != null) {
+            Dialog mDialog = dialog.getDialog();
+            if (mDialog != null && !mDialog.isShowing()) {
+                dialog.dismiss();
+            }
+        }
     }
 
     @Override
     public void showToast(String text) {
-
+        ToastUtils.showToast(getActivity(), text, Toast.LENGTH_SHORT);
     }
 
-    @Override
-    public void showDialog(String text) {
-
-    }
 
     @Override
-    public void showDialog(int id) {
-
-    }
-
-    @Override
-    public void showDialog(String text, int duration) {
-
+    public void showDialogs(int id) {
+        if (dialogTip == null) {
+            dialogTip = DialogTip.newInstance(getResources().getString(id), 0, DialogTip.DURATION_TYPE.DURATION_NO);
+            dialogTip.show(getChildFragmentManager(), "dialog_tip");
+        }
     }
 
     @Override
     public void showDialog(int id, int duration) {
+        if (dialogTipDuration == null) {
+            dialogTipDuration = DialogTip.newInstance(getResources().getString(id), duration, DialogTip.DURATION_TYPE.DURATION_YES);
+            dialogTipDuration.show(getChildFragmentManager(), "dialog_tip");
+        }
+    }
 
+    @Override
+    public void hideDialog() {
+        if (dialogTip != null) {
+            dialogTip.dismiss();
+        }
+        if (dialogTipDuration != null) {
+            dialogTipDuration.dismiss();
+        }
     }
 
     @Override

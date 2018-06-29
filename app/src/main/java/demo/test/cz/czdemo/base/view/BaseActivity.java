@@ -1,5 +1,7 @@
-package demo.test.cz.czdemo.base.activity;
+package demo.test.cz.czdemo.base.view;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -21,7 +24,11 @@ import com.trello.rxlifecycle2.components.RxActivity;
 import java.util.HashMap;
 import java.util.Map;
 
+import demo.test.cz.czdemo.base.IBaseView;
 import demo.test.cz.czdemo.basetips.IUiInit;
+import demo.test.cz.czdemo.utils.ToastUtils;
+import demo.test.cz.czdemo.widget.DialogTip;
+import demo.test.cz.czdemo.widget.LoadingDialog;
 import demo.test.cz.http_library.itip.Itip;
 import demo.test.cz.http_library.utils.LogUtils;
 
@@ -33,9 +40,14 @@ import demo.test.cz.http_library.utils.LogUtils;
  * @E-mail:zhenchen@excar.com.cn
  */
 
-public abstract class BaseActivity extends RxActivity implements Itip, IUiInit {
+public abstract class BaseActivity<P> extends RxActivity implements Itip, IUiInit, IBaseView<P> {
     protected final String TAG = getClass().getSimpleName();
     protected Fragment currentFragment;
+    protected View view;
+    protected P presenter;
+    private LoadingDialog dialog;
+    private DialogTip dialogTip;
+    private DialogTip dialogTipDuration;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,32 +63,55 @@ public abstract class BaseActivity extends RxActivity implements Itip, IUiInit {
 
     @Override
     public void showLoding(int id) {
+        if (dialog == null) {
+            dialog = LoadingDialog.newInstance(getResources().getString(id));
 
+        }
+        if (!dialog.getDialog().isShowing()) {
+            dialog.show(getFragmentManager(), "loading");
+        }
     }
 
     @Override
     public void hideLoding() {
-
+        if (dialog != null) {
+            Dialog mDialog = dialog.getDialog();
+            if (mDialog != null && !mDialog.isShowing()) {
+                dialog.dismiss();
+            }
+        }
     }
 
     @Override
     public void showToast(String text) {
-
+        ToastUtils.showToast(this, text, Toast.LENGTH_SHORT);
     }
 
-    @Override
-    public void showDialog(String text) {
-
-    }
 
     @Override
-    public void showDialog(String text, int duration) {
-
+    public void showDialogs(int id) {
+        if (dialogTip == null) {
+            dialogTip = DialogTip.newInstance(getResources().getString(id), 0, DialogTip.DURATION_TYPE.DURATION_NO);
+            dialogTip.show(getFragmentManager(), "dialog_tip");
+        }
     }
 
     @Override
     public void showDialog(int id, int duration) {
+        if (dialogTip == null) {
+            dialogTip = DialogTip.newInstance(getResources().getString(id), duration, DialogTip.DURATION_TYPE.DURATION_YES);
+            dialogTip.show(getFragmentManager(), "dialog_tip");
+        }
+    }
 
+    @Override
+    public void hideDialog() {
+        if (dialogTip != null) {
+            dialogTip.dismiss();
+        }
+        if (dialogTipDuration != null) {
+            dialogTipDuration.dismiss();
+        }
     }
 
     /**
@@ -120,5 +155,15 @@ public abstract class BaseActivity extends RxActivity implements Itip, IUiInit {
         }
         currentFragment = fragment;
         transaction.commit();
+    }
+
+    @Override
+    public P getPresenter() {
+        return presenter;
+    }
+
+    @Override
+    public void setPresenter(P presenter) {
+        this.presenter = presenter;
     }
 }

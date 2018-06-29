@@ -3,4 +3,10 @@
     <string name="title_home">首页</string>
     <string name="title_dashboard">主页</string>
     <string name="title_notifications">设置</string>
+
+    <!--loading_dialog-->
+    <string name="loading_dialog_loading">加载中...</string>
+
+    <!--dialog_tip-->
+    <string name="dialog_tip_confirm">确定</string>
 </resources>

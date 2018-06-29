@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_tip_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_tip_icon_margin_top"
+        app:srcCompat="@drawable/real_name_popup_sfz" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/real_name_dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_tip_background_radius"
+        android:textColor="@color/dialog_tip_text_color"
+        android:textSize="@dimen/text_size_m" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/real_name_dialog_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_tip_btn_margin"
+        android:layout_marginTop="@dimen/dialog_tip_btn_margin"
+        android:background="@drawable/btn_confirm"
+        android:paddingBottom="@dimen/dialog_tip_btn_padding_bottom"
+        android:paddingEnd="@dimen/dialog_tip_btn_padding"
+        android:paddingLeft="@dimen/dialog_tip_btn_padding"
+        android:paddingRight="@dimen/dialog_tip_btn_padding"
+        android:paddingStart="@dimen/dialog_tip_btn_padding"
+        android:paddingTop="@dimen/dialog_tip_btn_padding"
+        android:text="@string/dialog_tip_confirm" />
+</LinearLayout>

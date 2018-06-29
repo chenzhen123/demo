@@ -31,24 +31,20 @@ public interface Itip {
      */
     void showToast(String text);
 
-    /**
-     * 显示dialog
-     *
-     * @param text
-     */
-    void showDialog(String text);
-
-    void showDialog(int id);
 
     /**
-     * 显示倒计时的dialog
-     *
-     * @param text
-     * @param duration
+     * @param id       资源id
+     * @param duration 倒计时
      */
-    void showDialog(String text, int duration);
-
     void showDialog(int id, int duration);
+
+    /**
+     * 无倒计时的dialog
+     * @param id 资源id
+     */
+    void showDialogs(int id);
+
+    void hideDialog();
 
     /**
      * 获取lifecycleProvider对象,注意，rxactivity和rxfragment已经实现了这个接口

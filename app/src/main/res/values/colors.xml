@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--不透明度0-FF-->
+    <color name="color_white_opaque_0">#00FFFFFF</color>
+    <color name="color_white_opaque_5">#0DFFFFFF</color>
+    <color name="color_white_opaque_10">#1AFFFFFF</color>
+    <color name="color_white_opaque_15">#26FFFFFF</color>
+    <color name="color_white_opaque_20">#33FFFFFF</color>
+    <color name="color_white_opaque_25">#40FFFFFF</color>
+    <color name="color_white_opaque_30">#4DFFFFFF</color>
+    <color name="color_white_opaque_35">#59FFFFFF</color>
+    <color name="color_white_opaque_40">#66FFFFFF</color>
+    <color name="color_white_opaque_45">#73FFFFFF</color>
+    <color name="color_white_opaque_50">#80FFFFFF</color>
+    <color name="color_white_opaque_55">#8CFFFFFF</color>
+    <color name="color_white_opaque_60">#99FFFFFF</color>
+    <color name="color_white_opaque_65">#A6FFFFFF</color>
+    <color name="color_white_opaque_70">#B3FFFFFF</color>
+    <color name="color_white_opaque_75">#BFFFFFFF</color>
+    <color name="color_white_opaque_80">#CCFFFFFF</color>
+    <color name="color_white_opaque_85">#D9FFFFFF</color>
+    <color name="color_white_opaque_90">#E6FFFFFF</color>
+    <color name="color_white_opaque_95">#F2FFFFFF</color>
+    <color name="color_white_opaque_100">#FFFFFFFF</color>
+
     <color name="app_bg">#FFFFFFFF</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="btn_confirm_start_color_normal">#5196FF</color>
+    <color name="btn_confirm_end_color_normal">#2A52FF</color>
+    <color name="btn_confirm_start_color_pressed">#4F91F4</color>
+    <color name="btn_confirm_end_color_pressed">#3A45C3</color>
+    <!--dialog_tip-->
+    <color name="dialog_tip_text_color">#FF333333</color>
 </resources>

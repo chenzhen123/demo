@@ -4,9 +4,8 @@ import android.app.Fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import demo.test.cz.czdemo.base.activity.BaseActivity;
+import demo.test.cz.czdemo.base.view.BaseActivity;
 import demo.test.cz.czdemo.fragment.HomeFragment;
 import demo.test.cz.czdemo.fragment.MainPageFragment;
 import demo.test.cz.czdemo.fragment.SettingFragment;
