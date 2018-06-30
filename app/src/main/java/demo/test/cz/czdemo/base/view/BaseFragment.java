@@ -23,6 +23,7 @@ import demo.test.cz.czdemo.utils.ToastUtils;
 import demo.test.cz.czdemo.widget.DialogTip;
 import demo.test.cz.czdemo.widget.LoadingDialog;
 import demo.test.cz.http_library.itip.Itip;
+import demo.test.cz.http_library.utils.LogUtils;
 
 /**
  * File: BaseFragment.java
@@ -32,6 +33,7 @@ import demo.test.cz.http_library.itip.Itip;
  * E-mail:zhenchen@ecarx.com.cn
  **/
 public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiInit, IBaseView<P> {
+    private static final String TAG = BaseFragment.class.getSimpleName();
     protected View view;
     protected Activity activity;
     protected P presenter;
@@ -86,6 +88,7 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
             Dialog mDialog = dialog.getDialog();
             if (mDialog != null && !mDialog.isShowing()) {
                 dialog.dismiss();
+                LogUtils.i(TAG,"======hideLoding");
             }
         }
     }

@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/demo1.iml" filepath="$PROJECT_DIR$/demo1.iml" />
+      <module fileurl="file://G:\ecarx\demo\app\app.iml" filepath="G:\ecarx\demo\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
+      <module fileurl="file://G:\ecarx\demo\demo1.iml" filepath="G:\ecarx\demo\demo1.iml" />
       <module fileurl="file://$PROJECT_DIR$/http_library/http_library.iml" filepath="$PROJECT_DIR$/http_library/http_library.iml" />
+      <module fileurl="file://G:\ecarx\demo\http_library\http_library.iml" filepath="G:\ecarx\demo\http_library\http_library.iml" />
     </modules>
   </component>
 </project>
