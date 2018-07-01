@@ -1,6 +1,8 @@
 package demo.test.cz.czdemo.appilcation;
 
 import android.app.Application;
+import android.content.ComponentName;
+import android.content.Intent;
 
 /**
  * @description:
@@ -14,5 +16,10 @@ public class AndroidApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    public ComponentName startForegroundService(Intent service) {
+        return super.startForegroundService(service);
     }
 }
