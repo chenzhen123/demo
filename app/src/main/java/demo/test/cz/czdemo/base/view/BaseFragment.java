@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.stetho.common.LogUtil;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.RxFragment;
@@ -75,18 +76,15 @@ public abstract class BaseFragment<P> extends RxFragment implements Itip, IUiIni
     public void showLoding(int id) {
         if (dialog == null) {
             dialog = LoadingDialog.newInstance(getResources().getString(id));
-
         }
-        if (!dialog.getDialog().isShowing()) {
-            dialog.show(getChildFragmentManager(), "loading");
-        }
+        dialog.show(getChildFragmentManager(), "loading");
     }
 
     @Override
     public void hideLoding() {
         if (dialog != null) {
             Dialog mDialog = dialog.getDialog();
-            if (mDialog != null && !mDialog.isShowing()) {
+            if (mDialog != null && mDialog.isShowing()) {
                 dialog.dismiss();
                 LogUtils.i(TAG,"======hideLoding");
             }

@@ -68,18 +68,15 @@ public abstract class BaseActivity<P> extends RxActivity implements Itip, IUiIni
     public void showLoding(int id) {
         if (dialog == null) {
             dialog = LoadingDialog.newInstance(getResources().getString(id));
-
         }
-        if (!dialog.getDialog().isShowing()) {
-            dialog.show(getFragmentManager(), "loading");
-        }
+        dialog.show(getFragmentManager(), "loading");
     }
 
     @Override
     public void hideLoding() {
         if (dialog != null) {
             Dialog mDialog = dialog.getDialog();
-            if (mDialog != null && !mDialog.isShowing()) {
+            if (mDialog != null && mDialog.isShowing()) {
                 dialog.dismiss();
             }
         }

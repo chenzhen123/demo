@@ -46,12 +46,12 @@ public abstract class BaseDialog extends DialogFragment implements IBaseDialog {
         view = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, view);
         Window window = getDialog().getWindow();
+        window.setBackgroundDrawableResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = window.getAttributes();
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.gravity = Gravity.CENTER;
         window.setAttributes(lp);
-        window.setBackgroundDrawableResource(android.R.color.transparent);
         //dialog横线问题,有些系统会显示横线，在这里统一处理掉
         int dividerId = this.getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = getDialog().findViewById(dividerId);
@@ -73,4 +73,5 @@ public abstract class BaseDialog extends DialogFragment implements IBaseDialog {
         super.onDestroyView();
         unbinder.unbind();
     }
+
 }

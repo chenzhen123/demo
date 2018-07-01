@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import demo.test.cz.czdemo.R;
+import demo.test.cz.czdemo.base.dialog.BaseDialog;
 
 /**
  * File: LoadingDialog.java
@@ -30,14 +31,13 @@ import demo.test.cz.czdemo.R;
  * Create: 2018/6/29 10:54
  * E-mail:zhenchen@ecarx.com.cn
  **/
-public class LoadingDialog extends DialogFragment {
+public class LoadingDialog extends BaseDialog {
     private static String TAG = LoadingDialog.class.getSimpleName();
     private static String LOADING_DIALOG_TEXT = "load_dialog_text";
     @BindView(R.id.dialog_progress_iv)
     ImageView dialogProgressIv;
     @BindView(R.id.tv_loading_dialog_content)
     TextView tvLoadingDialogContent;
-    Unbinder unbinder;
     private Animation mCircleAnim;
     private View view;
 
@@ -50,24 +50,19 @@ public class LoadingDialog extends DialogFragment {
         return fragment;
     }
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.loading_dialog_layout, container, false);
-        Window window = getDialog().getWindow();
-        window.setBackgroundDrawableResource(android.R.color.transparent);
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.gravity = Gravity.CENTER;
-        window.setAttributes(params);
-        getDialog().setCanceledOnTouchOutside(false);
-        //dialog横线问题,有些系统会显示横线，在这里统一处理掉
-        int dividerId = this.getResources().getIdentifier("android:id/titleDivider", null, null);
-        View divider = getDialog().findViewById(dividerId);
-        if (divider != null) {
-            divider.setBackgroundColor(Color.TRANSPARENT);
-        }
+    public int getLayoutId() {
+        return R.layout.loading_dialog_layout;
+    }
+
+    @Override
+    public void initDate() {
+
+    }
+
+    @Override
+    public void initView() {
         //动画
         mCircleAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.dialog_loading_anim);
         LinearInterpolator interpolator = new LinearInterpolator();
@@ -75,17 +70,14 @@ public class LoadingDialog extends DialogFragment {
         if (mCircleAnim != null) {
             dialogProgressIv.setAnimation(mCircleAnim);
         }
-        unbinder = ButterKnife.bind(this, view);
         if (!TextUtils.isEmpty(getArguments().getString(LOADING_DIALOG_TEXT))) {
             tvLoadingDialogContent.setText(getArguments().getString(LOADING_DIALOG_TEXT));
         }
-        return view;
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    public void initListener() {
+
     }
 
     @Override
